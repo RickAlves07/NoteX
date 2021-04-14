@@ -1,0 +1,7 @@
+{
+  "name": "NoteX",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
