@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">NoteX</string>
+    <string name="title_activity_main">NoteX</string>
+    <string name="package_name">com.notex.app</string>
+    <string name="custom_url_scheme">com.notex.app</string>
+</resources>

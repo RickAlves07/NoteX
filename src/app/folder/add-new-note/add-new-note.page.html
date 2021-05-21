@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid class="container">
+    <ion-item>
+      <ion-label position="floating">Titulo</ion-label>
+      <ion-textarea id="titulo" [(ngModel)]="note.Title"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Texto</ion-label>
+      <ion-textarea id="texto" [(ngModel)]="note.Text"></ion-textarea>
+    </ion-item>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button [routerLink]="['/folder/NoteX']" color="danger">
+      <ion-icon name="trash-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveNote()" [routerLink]="['/folder/NoteX']" color="success">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

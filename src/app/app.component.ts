@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+export class AppComponent implements OnInit
+{
+  public appPages = [];
+
   constructor() {}
+
+  ngOnInit()
+  {
+    this.getMenuTagsOptions()
+  }
+
+  getMenuTagsOptions()
+  {
+    this.appPages = [
+      { title: 'Tag 1', url: '/folder/add-new-note/add-new-note', icon: '' },
+      { title: 'Tag 2', url: '/folder/add-new-note/add-new-note', icon: '' },
+      { title: 'Tag 3', url: '/folder/add-new-note/add-new-note', icon: '' },
+      { title: 'Tag 4', url: '/folder/add-new-note/add-new-note', icon: '' },
+      { title: 'Tag 5', url: '/folder/add-new-note/add-new-note', icon: '' },
+    ]
+  }
 }

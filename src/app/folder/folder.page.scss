@@ -26,3 +26,41 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+.container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.container .note
+{
+  margin-top: .5em;
+  border: 2px solid #E16B39;
+  border-radius: .8em;
+}
+
+.buttons
+{
+  background-color: #E16B39;
+  color: #E16B39;
+}
+
+.container .title
+{
+  font-size: 1.4em;
+}
+
+.container .text
+{
+  font-size: 1em;
+}
+
+.container .date
+{
+  font-size: .8em;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,4 +17,10 @@ import { FolderPage } from './folder.page';
   ],
   declarations: [FolderPage]
 })
-export class FolderPageModule {}
+export class FolderPageModule implements OnInit
+{
+  ngOnInit()
+  {
+
+  }
+}

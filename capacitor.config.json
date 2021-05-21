@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.notex.app",
   "appName": "NoteX",
   "bundledWebRuntime": false,
   "npmClient": "npm",
