@@ -14,6 +14,7 @@ declare var $: any;
 export class AddNewNotePage implements OnInit {
 
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
+  public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
 
   public note: any = {}
   public localNotes: any = [];
@@ -31,7 +32,9 @@ export class AddNewNotePage implements OnInit {
 
   saveNote()
   {
-    this.note.Date = moment().startOf('day').format(this.DATE_FRONTEND_ONLY)
+    const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
+    const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
+    this.note.Date = String(DateWeek + ', ' + DateMonth);
     this.localNotes.push(this.note)
     this.NotesService.saveNote(this.note);
   }
