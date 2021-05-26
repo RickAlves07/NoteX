@@ -22,6 +22,8 @@ export class FolderPage implements OnInit  {
 
   public notes: Array<any> = [];
 
+  public tags: Array<any> = [];
+
   constructor
   (
     private activatedRoute: ActivatedRoute,
@@ -34,6 +36,7 @@ export class FolderPage implements OnInit  {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.getNotes()
     this.createInitNotes();
+    this.createInitTags();
   }
 
   goToNewNote()
@@ -50,14 +53,23 @@ export class FolderPage implements OnInit  {
   {
     const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
     const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-    for(let i = 0; i <= 2  ; i++)
+    for(let i = 1; i <= 3 ; i++)
     {
       let notefake = {
-        Title: "Title",
-        Text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        Title: ("Title " + i),
+        Text: (i + " - Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
         Date: String(DateWeek + ', ' + DateMonth),
       }
       this.notes.push(notefake);
+    }
+  }
+
+  createInitTags()
+  {
+    for(let i = 1; i <= 3; i++)
+    {
+      let tagFake = ('Tag ' + i)
+      this.tags.push(tagFake);
     }
   }
 }
