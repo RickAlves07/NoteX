@@ -50,8 +50,8 @@ export class FolderPage implements OnInit  {
   {
     const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
     const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-    for(let i = 0; i <= 10  ; i++)
-    {debugger
+    for(let i = 0; i <= 2  ; i++)
+    {
       let notefake = {
         Title: "Title",
         Text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",

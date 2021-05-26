@@ -9,13 +9,29 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid class="container">
-    <ion-row *ngFor="let note of notes" class="note">
+    <ion-row *ngFor="let note of notes" class="note-body">
       <ion-col>
-        <span class="title">{{note.Title}}</span>
-        <br>
-        <span class="text">{{note.Text}}</span>
-        <br>
-        <span class="date">{{note.Date}}</span>
+        <div class="title-note">
+          <span class="title">{{note.Title}}</span>
+        </div>
+        <div class="text-note">
+            <span class="text">{{note.Text}}</span>
+        </div>
+        <div class="footer-note">
+          <div class="left-block">
+            <div class="tag-item">
+              <span>Tag</span>
+            </div>
+            <div class="tag-item">
+              <span>Tag</span>
+            </div>
+          </div>
+          <div class="right-block">
+            <div class="date">
+              <span>{{note.Date}}</span>
+            </div>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
