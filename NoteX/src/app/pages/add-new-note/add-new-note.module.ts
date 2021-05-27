@@ -1,5 +1,4 @@
-import { NoteDto } from './../../dtos/note-dto';
-import { NotesService } from './../../services/notes-service.service';
+
 import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +23,6 @@ export class AddNewNotePageModule implements OnInit
 
   constructor
   (
-    public notesService: NotesService,
   )
   {}
 

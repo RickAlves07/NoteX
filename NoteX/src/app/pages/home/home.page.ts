@@ -1,16 +1,16 @@
-import { NotesService } from './../services/notes-service.service';
+import { NotesService } from '../../services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-folder',
-  templateUrl: './folder.page.html',
-  styleUrls: ['./folder.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
 
-export class FolderPage implements OnInit  {
+export class HomePage implements OnInit {
 
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";

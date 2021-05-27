@@ -19,29 +19,4 @@ import { NoteDto } from 'src/app/dtos/note-dto';
   ],
   declarations: [AddNewTagPage]
 })
-export class AddNewTagPageModule
-{
-  public note: NoteDto;
-  public newtag: string
-
-  constructor
-  (
-    public notesService: NotesService,
-  )
-  {}
-
-  ngOnInit()
-  {
-
-  }
-
-  public creatingNeWTag()
-  {
-
-  }
-
-  public savingNewTag()
-  {
-  }
-
-}
+export class AddNewTagPageModule {}

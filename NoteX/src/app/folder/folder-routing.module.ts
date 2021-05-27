@@ -10,15 +10,15 @@ const routes: Routes = [
   },
   {
     path: 'add-new-tag',
-    loadChildren: () => import('./add-new-tag/add-new-tag.module').then( m => m.AddNewTagPageModule)
+    loadChildren: () => import('../pages/add-new-tag/add-new-tag.module').then( m => m.AddNewTagPageModule)
   },
   {
     path: 'add-new-note',
-    loadChildren: () => import('./add-new-note/add-new-note.module').then( m => m.AddNewNotePageModule)
+    loadChildren: () => import('../pages/add-new-note/add-new-note.module').then( m => m.AddNewNotePageModule)
   },
   {
     path: 'search-note',
-    loadChildren: () => import('./search-note/search-note.module').then( m => m.SearchNotePageModule)
+    loadChildren: () => import('../pages/search-note/search-note.module').then( m => m.SearchNotePageModule)
   }
 ];
 

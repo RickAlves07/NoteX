@@ -19,12 +19,14 @@ export class AppComponent implements OnInit
   getMenuTagsOptions()
   {
     this.appPages = [
-      { title: 'Todas', url: '/folder/add-new-note/add-new-note', icon: '' },
+      { title: 'Todas', url: '', icon: '' },
     ]
+    // const tags = this.getTags()
+    // this.appPages.push(tags);
   }
 
-  teste()
+  getTags()
   {
-
+    //test
   }
 }
