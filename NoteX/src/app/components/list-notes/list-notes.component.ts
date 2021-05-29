@@ -19,8 +19,8 @@ export class ListNotesComponent implements OnInit {
 
   ngOnInit() {}
 
-  setSelectedNoteToEdit(note)
+  setSelectedNoteToEdit(note, index)
   {
-    this.NotesService.setSeletedNoteToEdit(note);
+    this.NotesService.setSeletedNoteToEdit(note, index);
   }
 }
