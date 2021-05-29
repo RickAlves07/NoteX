@@ -1,8 +1,7 @@
 import { NotesService } from '../../services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import * as moment from 'moment';
+import { NoteDto } from 'src/app/dtos/note-dto';
+import { TagDto } from 'src/app/dtos/tag-dto';
 
 @Component({
   selector: 'app-home',
@@ -10,37 +9,19 @@ import * as moment from 'moment';
   styleUrls: ['./home.page.scss'],
 })
 
-export class HomePage implements OnInit {
-
-  public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
-  public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
-
-  public folder: string;
-
-  public goNewNotePage: any = null;
-
-  public notes: Array<any> = [];
-
-  public tags: Array<any> = [];
+export class HomePage implements OnInit
+{
+  public notes: Array<NoteDto> = [];
+  public tags: Array<TagDto> = [];
 
   constructor
-  (
-    private activatedRoute: ActivatedRoute,
-    public navCtrl: NavController,
-    public NotesService: NotesService,
+  (public readonly NotesService: NotesService,
   ) { }
 
   ngOnInit()
   {
-    // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.getNotes()
-    this.createInitNotes();
-    this.createInitTags();
-  }
-
-  goToNewNote()
-  {
-    this.goNewNotePage = { title: 'Tag 1', url: '/folder/add-new-note/add-new-note', icon: '' };
+    this.getTags();
   }
 
   getNotes()
@@ -48,27 +29,8 @@ export class HomePage implements OnInit {
     this.notes = this.NotesService.getNotes()
   }
 
-  createInitNotes()
+  getTags()
   {
-    const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
-    const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-    for(let i = 1; i <= 3 ; i++)
-    {
-      let notefake = {
-        Title: ("Title " + i),
-        Text: (i + " - Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-        Date: String(DateWeek + ', ' + DateMonth),
-      }
-      this.notes.push(notefake);
-    }
-  }
-
-  createInitTags()
-  {
-    for(let i = 1; i <= 3; i++)
-    {
-      let tagFake = ('Tag ' + i)
-      this.tags.push(tagFake);
-    }
+    this.tags = this.NotesService.getTags()
   }
 }

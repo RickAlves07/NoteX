@@ -1,14 +1,9 @@
-export class NoteDto {
-
-  public Id: number;
+import { TagDto } from './tag-dto';
+export class NoteDto
+{
   public Title: string;
   public Text: string;
-  public Tags: Array<string>;
-  public CreateDate: string;
+  public Tags: Array<TagDto> = [];
+  public CreatedDate: string;
   public EditedDate: string;
-
-  construtor()
-  {
-    //DO NOTHING
-  }
 }

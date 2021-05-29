@@ -1,3 +1,4 @@
+import { NotesService } from 'src/app/services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,24 +10,13 @@ export class AppComponent implements OnInit
 {
   public appPages = [];
 
-  constructor() {}
+  constructor(
+    public readonly NotesService: NotesService
+  ) {}
 
   ngOnInit()
   {
-    this.getMenuTagsOptions()
-  }
-
-  getMenuTagsOptions()
-  {
-    this.appPages = [
-      { title: 'Todas', url: '', icon: '' },
-    ]
-    // const tags = this.getTags()
-    // this.appPages.push(tags);
-  }
-
-  getTags()
-  {
-    //test
+    this.NotesService.createInitNotes();
+    this.NotesService.createInitTags();
   }
 }

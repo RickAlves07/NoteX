@@ -1,9 +1,5 @@
 import { NotesService } from 'src/app/services/notes-service.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import * as moment from 'moment';
-
-
-declare var $: any;
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-new-note',
@@ -23,17 +19,13 @@ export class AddNewNotePage implements OnInit {
     public NotesService: NotesService,
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   saveNote()
   {
     if(this.verifyIfFieldsIsEmpty())
     {
-      const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
-      const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-      this.note.Date = String(DateWeek + ', ' + DateMonth);
+      this.note.Date = this.getDateWithDayOfWeek()
       this.localNotes.push(this.note)
       this.NotesService.saveNote(this.note);
     }
@@ -51,5 +43,10 @@ export class AddNewNotePage implements OnInit {
   clearFields()
   {
     this.note = this.noteEmpty;
+  }
+
+  getDateWithDayOfWeek()
+  {
+    return this.NotesService.getDateWithDayOfWeek();
   }
 }
