@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit
 {
-  public appPages = [];
+  public menuItems = [];
 
   constructor(
     public readonly NotesService: NotesService
@@ -18,5 +18,6 @@ export class AppComponent implements OnInit
   {
     this.NotesService.createInitNotes();
     this.NotesService.createInitTags();
+    this.menuItems = this.NotesService.getTagsMenu();
   }
 }
