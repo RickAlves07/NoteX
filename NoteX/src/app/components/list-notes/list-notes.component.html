@@ -1,0 +1,24 @@
+<ion-grid class="container">
+  <ion-row *ngFor="let note of notes" class="note-body">
+    <ion-col>
+      <div class="title-note">
+        <span class="title">{{note.Title}}</span>
+      </div>
+      <div class="text-note">
+          <span class="text">{{note.Text}}</span>
+      </div>
+      <div class="footer-note">
+        <div class="left-block">
+          <div class="tag-item" *ngFor="let tag of tags">
+            <span>{{ tag }}</span>
+          </div>
+        </div>
+        <div class="right-block">
+          <div class="date">
+            <span>{{note.Date}}</span>
+          </div>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

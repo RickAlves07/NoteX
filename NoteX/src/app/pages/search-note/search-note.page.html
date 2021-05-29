@@ -1,9 +1,21 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Search</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button [routerLink]="['']"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<span>teste search</span>
+<ion-content [fullscreen]="true">
+  <ion-grid class="container">
+    <app-list-notes [notes]="notes" [tags]="tags"></app-list-notes>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/add-new-note']">
+      <ion-icon name="add">
+      </ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

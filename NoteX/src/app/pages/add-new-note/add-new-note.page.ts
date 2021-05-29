@@ -15,12 +15,9 @@ export class AddNewNotePage implements OnInit {
 
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
-
+  public readonly noteEmpty: any = null;
   public note: any = {}
   public localNotes: any = [];
-
-
-  public noteEmpty: any = null;
 
   constructor(
     public NotesService: NotesService,
@@ -32,11 +29,27 @@ export class AddNewNotePage implements OnInit {
 
   saveNote()
   {
-    const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
-    const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-    this.note.Date = String(DateWeek + ', ' + DateMonth);
-    this.localNotes.push(this.note)
-    this.NotesService.saveNote(this.note);
+    if(this.verifyIfFieldsIsEmpty())
+    {
+      const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
+      const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
+      this.note.Date = String(DateWeek + ', ' + DateMonth);
+      this.localNotes.push(this.note)
+      this.NotesService.saveNote(this.note);
+    }
+    this.clearFields();
   }
 
+  verifyIfFieldsIsEmpty()
+  {
+    const emptyString = '';
+    const verifyTitle = ((this.note.Title != null && this.note.Title != emptyString) ? true : false);
+    const verifyText = ((this.note.Text != null && this.note.Text != emptyString) ? true : false );
+    return (verifyTitle || verifyText);
+  }
+
+  clearFields()
+  {
+    this.note = this.noteEmpty;
+  }
 }

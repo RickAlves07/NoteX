@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button [routerLink]="['']"></ion-back-button>
     </ion-buttons>
     <ion-title>New Note</ion-title>
   </ion-toolbar>
@@ -21,14 +21,14 @@
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button [routerLink]="['/folder/NoteX']" color="danger">
-      <ion-icon name="trash-outline"></ion-icon>
+    <ion-fab-button (click)="clearFields()" [routerLink]="['']" color="danger">
+      <ion-icon name="trash"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="saveNote()" [routerLink]="['/folder/NoteX']" color="success">
-      <ion-icon name="checkmark-outline"></ion-icon>
+    <ion-fab-button (click)="saveNote()" [routerLink]="['']" color="success">
+      <ion-icon name="checkmark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
