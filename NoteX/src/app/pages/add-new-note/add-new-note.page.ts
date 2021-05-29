@@ -8,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-new-note.page.scss'],
 })
 
-export class AddNewNotePage implements OnInit {
+export class AddNewNotePage implements OnInit
+{
 
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
   public readonly noteEmpty: NoteDto = null;
   public note: any = {}
-  public localNotes: any = [];
 
   constructor(
     public NotesService: NotesService,
@@ -26,8 +26,7 @@ export class AddNewNotePage implements OnInit {
   {
     if(this.verifyIfFieldsIsEmpty())
     {
-      this.note.Date = this.getDateWithDayOfWeek()
-      this.localNotes.push(this.note)
+      this.note.CreatedDate = this.getDateWithDayOfWeek()
       this.NotesService.saveNote(this.note);
     }
     this.clearFields();
