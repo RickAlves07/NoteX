@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
 
   ngOnInit()
   {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     this.getNotes()
     this.createInitNotes();
     this.createInitTags();

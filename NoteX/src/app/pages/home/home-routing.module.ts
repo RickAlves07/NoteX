@@ -4,33 +4,21 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomePage,
-    children: [
-      {
-        path: 'add-new-tag',
-        loadChildren: () => import('../add-new-tag/add-new-tag.module').then( m => m.AddNewTagPageModule)
-      },
-      {
-        path: 'add-new-note',
-        loadChildren: () => import('../add-new-note/add-new-note.module').then( m => m.AddNewNotePageModule)
-      },
-      {
-        path: 'search-note',
-        loadChildren: () => import('../search-note/search-note.module').then( m => m.SearchNotePageModule)
-      },
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      }
-    ]
   },
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
-  }
+    path: 'add-new-note',
+    loadChildren: () => import('../add-new-note/add-new-note.module').then( m => m.AddNewNotePageModule)
+  },
+  {
+    path: 'add-new-tag',
+    loadChildren: () => import('../add-new-tag/add-new-tag.module').then( m => m.AddNewTagPageModule)
+  },
+  {
+    path: 'search-note',
+    loadChildren: () => import('../search-note/search-note.module').then( m => m.SearchNotePageModule)
+  },
 ];
 
 @NgModule({

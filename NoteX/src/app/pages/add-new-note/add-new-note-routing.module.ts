@@ -5,7 +5,7 @@ import { AddNewNotePage } from './add-new-note.page';
 
 const routes: Routes = [
   {
-    path: 'add-new-note',
+    path: '',
     component: AddNewNotePage
   }
 ];
