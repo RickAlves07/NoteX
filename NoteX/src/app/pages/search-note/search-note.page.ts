@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchNotePage implements OnInit {
 
+  public notes: Array<any> = [];
+
+  public tags: Array<any> = [];
   constructor() { }
 
   ngOnInit() {

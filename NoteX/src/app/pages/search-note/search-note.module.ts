@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SearchNotePageRoutingModule } from './search-note-routing.module';
 
 import { SearchNotePage } from './search-note.page';
+import { ListNotesComponent } from 'src/app/components/list-notes/list-notes.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { SearchNotePage } from './search-note.page';
     IonicModule,
     SearchNotePageRoutingModule
   ],
-  declarations: [SearchNotePage]
+  declarations: [SearchNotePage, ListNotesComponent]
 })
 export class SearchNotePageModule {}

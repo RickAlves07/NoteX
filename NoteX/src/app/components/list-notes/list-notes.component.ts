@@ -1,7 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NotesService } from '../../services/notes-service.service';
-import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list-notes',
