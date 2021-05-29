@@ -12,6 +12,8 @@ export class SearchNotePage implements OnInit {
 
   public notes: Array<NoteDto> = [];
   public tags: Array<TagDto> = [];
+  public notesFiltered: Array<NoteDto> = [];
+  public textToFind: string;
 
   constructor
   (public NotesService: NotesService,
@@ -26,10 +28,17 @@ export class SearchNotePage implements OnInit {
   getNotes()
   {
     this.notes = this.NotesService.getNotes()
+    this.notesFiltered = this.notes;
   }
 
   getTags()
   {
     this.tags = this.NotesService.getTags()
+  }
+
+  filterNotes(textInput)
+  {
+    this.textToFind = textInput.target.value;
+    this.notesFiltered = this.NotesService.searchTextNotes(this.textToFind);
   }
 }

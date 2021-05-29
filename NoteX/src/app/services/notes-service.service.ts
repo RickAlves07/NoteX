@@ -122,4 +122,14 @@ export class NotesService
     this.selectedNoteToEdit = this.NOTE_EMPTY;
     this.indexSelectedNoteToEdit = null;
   }
+
+  searchTextNotes(textToFind)
+  {
+    return this.notes.filter(note =>
+      note.Title.includes(textToFind) ||
+      note.Text.includes(textToFind) ||
+      note.CreatedDate.includes(textToFind) ||
+      note.EditedDate.includes(textToFind) ||
+      note.Tags.filter(tag => tag.Name.includes(textToFind)));
+  }
 }

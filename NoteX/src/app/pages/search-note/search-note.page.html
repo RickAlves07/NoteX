@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button [routerLink]="['']"></ion-back-button>
     </ion-buttons>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="filterNotes($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <app-list-notes [notes]="notes" [tags]="tags"></app-list-notes>
+    <app-list-notes [notes]="notesFiltered" [tags]="tags"></app-list-notes>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/add-new-note']">
