@@ -12,14 +12,19 @@ export class NotesService
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
 
+  public readonly noteEmpty: NoteDto = null;
+
   constructor() { }
 
   public notes: Array<NoteDto> = [];
   public tags: Array<TagDto> = [];
+  public selectedTagFilter: TagDto;
+  public selectedNoteToEdit: NoteDto;
 
   saveNote(note)
   {
     this.notes.unshift(note);
+    this.clearSelectedNoteToEdit();
   }
 
   getNotes()
@@ -81,5 +86,30 @@ export class NotesService
       menuItens.push(tag)
     });
     return menuItens;
+  }
+
+  setSelectedTagFilter(tag: TagDto)
+  {
+    this.selectedTagFilter = tag;
+  }
+
+  setSeletedNoteToEdit(note: NoteDto)
+  {
+    this.selectedNoteToEdit = note;
+  }
+
+  getSelectedNoteToEdit()
+  {
+    return this.selectedNoteToEdit;
+  }
+
+  getSelectedTagFilter()
+  {
+    return this.selectedTagFilter;
+  }
+
+  clearSelectedNoteToEdit()
+  {
+    this.selectedNoteToEdit = this.noteEmpty;
   }
 }

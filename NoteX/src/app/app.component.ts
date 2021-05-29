@@ -20,4 +20,9 @@ export class AppComponent implements OnInit
     this.NotesService.createInitTags();
     this.menuItems = this.NotesService.getTagsMenu();
   }
+
+  setSelectedTagFilter(tag)
+  {
+    this.NotesService.setSelectedTagFilter(tag)
+  }
 }
