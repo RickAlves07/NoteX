@@ -11,7 +11,7 @@ export class AppComponent implements OnInit
   public menuItems = [];
 
   constructor(
-    public readonly NotesService: NotesService
+    public NotesService: NotesService
   ) {}
 
   ngOnInit()

@@ -1,3 +1,6 @@
+import { NotesService } from 'src/app/services/notes-service.service';
+import { TagDto } from './../../dtos/tag-dto';
+import { NoteDto } from 'src/app/dtos/note-dto';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +10,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ListNotesComponent implements OnInit {
 
-  @Input("notes") notes: Array<any> = [];
-	@Input("tags") tags: Array<any> = [];
+  @Input("notes") notes: Array<NoteDto> = [];
+	@Input("tags") tags: Array<TagDto> = [];
 
-  constructor() { }
+  constructor(
+    public NotesService: NotesService
+  ) { }
 
   ngOnInit() {}
 
+  setSelectedNoteToEdit(note)
+  {
+    this.NotesService.setSeletedNoteToEdit(note);
+  }
 }

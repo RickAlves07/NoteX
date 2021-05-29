@@ -1,5 +1,5 @@
 <ion-grid class="container">
-  <ion-row *ngFor="let note of notes" class="note-body">
+  <ion-row *ngFor="let note of notes" class="note-body" (click)="setSelectedNoteToEdit(note)">
     <ion-col>
       <div class="title-note">
         <span class="title">{{note.Title}}</span>

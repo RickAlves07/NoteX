@@ -14,7 +14,7 @@ export class SearchNotePage implements OnInit {
   public tags: Array<TagDto> = [];
 
   constructor
-  (public readonly NotesService: NotesService,
+  (public NotesService: NotesService,
   ) { }
 
   ngOnInit()
