@@ -9,12 +9,48 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid class="container">
-    teste
+    <!-- List of Notes -->
+    <div class="tag-item" *ngFor="let tag of tags; let i = index">
+      <div class="left-side">
+        <span *ngIf="!isEdit[i]">{{ tag.Name }}</span>
+        <textarea *ngIf="isEdit[i]" class="textarea" maxlength="15" type="text" [(ngModel)]="textTag[i]"></textarea>
+      </div>
+      <div class="right-side">
+        <ion-button shape="round" color="success" *ngIf="isEdit[i]">
+          <ion-icon name="checkmark" color="light"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="primary" *ngIf="!isEdit[i]">
+          <ion-icon name="pencil-sharp" color="light"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="danger">
+          <ion-icon name="trash" color="light"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <!-- Add New Note -->
+    <div class="tag-item">
+      <div class="left-side">
+        <span *ngIf="!isAdd">New Note</span>
+        <textarea *ngIf="isAdd" class="textarea" maxlength="15" type="text" [(ngModel)]="textNewTag"></textarea>
+      </div>
+      <div class="right-side">
+        <ion-button shape="round" color="primary" *ngIf="!isAdd">
+          <ion-icon name="add" color="light"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="primary" *ngIf="isAdd">
+          <ion-icon name="pencil-sharp" color="light"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="danger" *ngIf="isAdd">
+          <ion-icon name="trash" color="light"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="primary" [routerLink]="['/add-new-note']">
-      <ion-icon name="add">
+      <ion-icon name="add" color="light">
       </ion-icon>
     </ion-fab-button>
   </ion-fab>

@@ -10,6 +10,15 @@
               <ion-label>{{ item.Name }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="['/add-new-tag']" lines="none" detail="false" routerLinkActive="selected" routerLinkActive="active">
+              <ion-label>New Tag</ion-label>
+              <ion-button shape="round" color="primary">
+                <ion-icon name="add" color="light">
+                </ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
       </ion-content>

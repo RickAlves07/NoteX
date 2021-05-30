@@ -126,10 +126,8 @@ export class NotesService
   searchTextNotes(textToFind)
   {
     return this.notes.filter(note =>
-      note.Title.includes(textToFind) ||
-      note.Text.includes(textToFind) ||
-      note.CreatedDate.includes(textToFind) ||
-      note.EditedDate.includes(textToFind) ||
-      note.Tags.filter(tag => tag.Name.includes(textToFind)));
+      note.Title.toLowerCase().includes(textToFind.toLowerCase()) ||
+      note.Text.toLowerCase().includes(textToFind.toLowerCase()) ||
+      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase()));
   }
 }
