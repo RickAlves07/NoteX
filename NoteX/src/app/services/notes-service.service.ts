@@ -130,4 +130,14 @@ export class NotesService
       note.Text.toLowerCase().includes(textToFind.toLowerCase()) ||
       note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase()));
   }
+
+  deleteTag(index)
+  {
+    this.tags.splice(index, 1);
+  }
+
+  saveNewTag(tag: TagDto)
+  {debugger
+    this.tags.push(tag);
+  }
 }

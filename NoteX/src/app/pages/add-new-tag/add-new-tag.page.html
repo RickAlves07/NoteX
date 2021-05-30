@@ -9,38 +9,38 @@
 
 <ion-content [fullscreen]="true">
   <ion-grid class="container">
-    <!-- List of Notes -->
-    <div class="tag-item" *ngFor="let tag of tags; let i = index">
+
+    <div class="tag-item" *ngFor="let tag of tags; let i = index" id="list-tags">
       <div class="left-side">
-        <span *ngIf="!isEdit[i]">{{ tag.Name }}</span>
+        <span *ngIf="!isEdit[i]" class="text-tag">{{ tag.Name }}</span>
         <textarea *ngIf="isEdit[i]" class="textarea" maxlength="15" type="text" [(ngModel)]="textTag[i]"></textarea>
       </div>
       <div class="right-side">
-        <ion-button shape="round" color="success" *ngIf="isEdit[i]">
-          <ion-icon name="checkmark" color="light"></ion-icon>
-        </ion-button>
-        <ion-button shape="round" color="primary" *ngIf="!isEdit[i]">
+        <ion-button shape="round" color="primary" *ngIf="!isEdit[i]" (click)="editTag(i)">
           <ion-icon name="pencil-sharp" color="light"></ion-icon>
         </ion-button>
-        <ion-button shape="round" color="danger">
+        <ion-button shape="round" color="success" *ngIf="isEdit[i]" (click)="confirmEditTag(i)">
+          <ion-icon name="checkmark" color="light"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" color="danger" (click)="deleteTag(i)">
           <ion-icon name="trash" color="light"></ion-icon>
         </ion-button>
       </div>
     </div>
-    <!-- Add New Note -->
-    <div class="tag-item">
+
+    <div class="tag-item" id="add-new-tag">
       <div class="left-side">
-        <span *ngIf="!isAdd">New Note</span>
+        <span *ngIf="!isAdd" class="text-tag">New Note</span>
         <textarea *ngIf="isAdd" class="textarea" maxlength="15" type="text" [(ngModel)]="textNewTag"></textarea>
       </div>
       <div class="right-side">
-        <ion-button shape="round" color="primary" *ngIf="!isAdd">
+        <ion-button shape="round" color="primary" *ngIf="!isAdd" (click)="addNewTag()">
           <ion-icon name="add" color="light"></ion-icon>
         </ion-button>
-        <ion-button shape="round" color="primary" *ngIf="isAdd">
-          <ion-icon name="pencil-sharp" color="light"></ion-icon>
+        <ion-button shape="round" color="primary" *ngIf="isAdd" (click)="comfirmAddNewTag()">
+          <ion-icon name="checkmark" color="light"></ion-icon>
         </ion-button>
-        <ion-button shape="round" color="danger" *ngIf="isAdd">
+        <ion-button shape="round" color="danger" *ngIf="isAdd" (click)="cancelAddNewTag()">
           <ion-icon name="trash" color="light"></ion-icon>
         </ion-button>
       </div>

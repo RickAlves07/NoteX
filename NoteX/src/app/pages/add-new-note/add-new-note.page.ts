@@ -1,4 +1,4 @@
-import { NoteDto } from 'src/app/dtos/note-dto';
+import { NoteDto } from '../../dtos/note-dto';
 import { NotesService } from 'src/app/services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 
 export class AddNewNotePage implements OnInit
 {
-
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
   public readonly NOTE_EMPTY = null;
