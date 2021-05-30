@@ -23,14 +23,13 @@ export class HomePage implements OnInit
     this.getNotes()
     this.getTags();
   }
-
   getNotes()
   {
-    this.notes = this.NotesService.getNotes()
+    this.notes = this.NotesService.getNotes();
   }
 
   getTags()
   {
-    this.tags = this.NotesService.getTags()
+    this.tags = this.NotesService.getTags();
   }
 }

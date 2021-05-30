@@ -1,5 +1,5 @@
 <ion-grid class="container">
-  <ion-row *ngFor="let note of notes; let i = index" class="note-body" (click)="setSelectedNoteToEdit(note, i)" [routerLink]="['/add-new-note']" >
+  <ion-row *ngFor="let note of notes; let i = index" class="note-body" (click)="setSelectedNoteToEdit(note, i)" [routerLink]="['/add-new-note']">
     <ion-col>
       <div class="title-note">
         <span class="title">{{note.Title}}</span>

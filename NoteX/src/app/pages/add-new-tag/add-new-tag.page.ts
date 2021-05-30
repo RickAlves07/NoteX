@@ -19,7 +19,7 @@ export class AddNewTagPage implements OnInit
   public isAdd: boolean;
   public newTag: TagDto = new TagDto;
   constructor(
-    public NotesService: NotesService
+    public NotesService: NotesService,
   ) { }
 
   ngOnInit()
@@ -52,7 +52,7 @@ export class AddNewTagPage implements OnInit
     }
   }
 
-  deleteTag(index)
+  deleteTagFromService(index)
   {
     this.NotesService.deleteTag(index)
     this.getTags();
@@ -97,5 +97,10 @@ export class AddNewTagPage implements OnInit
   {
     this.textNewTag = this.EMPTY_STRING;
     this.newTag = this.TAG_EMPTY;
+  }
+
+  setSelectedTagToAddInNote(tag)
+  {
+    this.NotesService.setSelectedTagToAddInNote(tag);
   }
 }

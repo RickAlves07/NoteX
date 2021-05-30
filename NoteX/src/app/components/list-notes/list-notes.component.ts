@@ -11,7 +11,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ListNotesComponent implements OnInit {
 
   @Input("notes") notes: Array<NoteDto> = [];
-	@Input("tags") tags: Array<TagDto> = [];
 
   constructor(
     public NotesService: NotesService

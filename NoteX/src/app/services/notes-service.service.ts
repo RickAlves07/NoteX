@@ -12,14 +12,16 @@ export class NotesService
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
   public readonly NOTE_EMPTY = null;
+  public readonly TAG_EMPTY = new TagDto;
 
   constructor() { }
 
   public notes: Array<NoteDto> = [];
   public tags: Array<TagDto> = [];
   public selectedTagFilter: TagDto;
-  public selectedNoteToEdit: NoteDto;
+  public selectedNoteToEdit: NoteDto = new NoteDto;
   public indexSelectedNoteToEdit: number;
+  public selectedTagToAddInNote: TagDto = new TagDto;
 
   saveNote(note)
   {
@@ -158,5 +160,22 @@ export class NotesService
   saveNewTag(tag: TagDto)
   {
     this.tags.push(tag);
+  }
+  searchNotesWithTag(tagToFilter)
+  {
+    return this.notes.filter(note =>
+      note.Tags.filter(tag =>
+        tag.Name.toLowerCase() == tagToFilter));
+  }
+
+  setSelectedTagToAddInNote(tag)
+  {
+    this.selectedTagToAddInNote = tag;
+  }
+
+  getSelectedTagToAddInNote()
+  {
+    const tagTemp = this.selectedTagToAddInNote;
+    return tagTemp;
   }
 }

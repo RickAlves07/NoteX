@@ -1,6 +1,8 @@
 import { NoteDto } from '../../dtos/note-dto';
 import { NotesService } from 'src/app/services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
+import { TagDto } from 'src/app/dtos/tag-dto';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-note',
@@ -15,17 +17,22 @@ export class AddNewNotePage implements OnInit
   public readonly NOTE_EMPTY = null;
   public readonly NEW_NOTE_STRING = 'New Note';
   public readonly EDIT_NOTE_STRING ='Edit Note';
+  public readonly TAG_EMPTY = new TagDto;
   public note: NoteDto = new NoteDto;
   public pageTitle: string;
   public isEdit: boolean;
+  public refresh: any;
 
-  constructor(
+  constructor
+  (
     public NotesService: NotesService,
-  ) { }
+  ) {}
 
   ngOnInit()
   {
+    this.verifyIfHasSelectedTagToAdd();
     this.verifyIsEditOrNewNote();
+    console.log(this.note)
   }
 
   saveNote()
@@ -76,9 +83,9 @@ export class AddNewNotePage implements OnInit
   }
 
   verifyIsEditOrNewNote()
-  {
+  {debugger
     const noteToEdit = this.NotesService.getSelectedNoteToEdit()
-    if((noteToEdit == null) || (noteToEdit == undefined))
+    if((noteToEdit.Title == '') && (noteToEdit.Text == ''))
     {
       this.isEdit = false;
       this.pageTitle = this.NEW_NOTE_STRING;
@@ -89,5 +96,31 @@ export class AddNewNotePage implements OnInit
       this.isEdit = true;
       this.pageTitle = this.EDIT_NOTE_STRING;
     }
+  }
+  removeTagFromNote(index)
+  {
+    this.note.Tags.splice(index, 1);
+  }
+
+  getSelectedTagToAddInNote()
+  {
+    const tagTemp = this.NotesService.getSelectedTagToAddInNote();
+    if((tagTemp.Name != undefined) && (tagTemp.Name !== null) && (tagTemp !== this.TAG_EMPTY) && (tagTemp.Name !== ''))
+    {
+      const test = this.note.Tags.filter(tag => tag.Name == tagTemp.Name)
+      if(test === [])
+      {debugger
+        this.note.Tags.push(tagTemp);
+      }
+    }
+  }
+
+  verifyIfHasSelectedTagToAdd()
+  {
+    interval(1000)
+    .subscribe(() => {
+      this.getSelectedTagToAddInNote();
+    });
+
   }
 }

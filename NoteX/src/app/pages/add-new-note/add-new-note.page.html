@@ -25,9 +25,10 @@
           <span>Tags</span>
         </div>
         <div class="row">
-          <div class="tag" *ngFor="let tag of note.Tags">
+          <div class="tag" *ngFor="let tag of note.Tags; let tagIndex = index" (click)="removeTagFromNote(tagIndex)">
             <div class="tag-item">
               <span>{{ tag.Name }}</span>
+              <ion-icon name="close-outline"></ion-icon>
             </div>
           </div>
           <ion-button shape="round" [routerLink]="['/add-new-tag']">
