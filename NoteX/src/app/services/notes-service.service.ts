@@ -27,24 +27,18 @@ export class NotesService
     this.notes.unshift(note);
     this.updateNoteId();
     this.clearSelectedNoteToEdit();
-    console.log('saveNote')
-    console.log(this.notes)
   }
 
   updateNote(note)
   {
     this.notes.splice(note.Id, 1);
     this.saveNote(note);
-    console.log('Updating')
-    console.log(this.notes)
   }
 
   deleteNote(note)
   {
     this.notes.splice(note.Id, 1);
     this.updateNoteId();
-    console.log('deleteNote')
-    console.log(this.notes)
   }
 
   updateNoteId()
@@ -128,16 +122,12 @@ export class NotesService
   {
     this.selectedNoteToEdit = note;
     this.indexSelectedNoteToEdit = note.Id;
-    console.log('setSelectedNote')
-    console.log(this.notes)
   }
 
   getSelectedNoteToEdit()
   {
     const noteToReturn = this.selectedNoteToEdit;
     this.clearSelectedNoteToEdit();
-    console.log('getSelected')
-    console.log(this.notes)
     return noteToReturn;
   }
 
