@@ -9,3 +9,40 @@
   border-radius: .8em;
   width: auto;
 }
+
+.tag
+{
+  display: flex;
+  flex-direction: row;
+  font-size: .8em;
+  align-items: center;
+  .tag-item
+  {
+    border: 1px solid #E16B39;
+    border-radius: .3em;
+    padding: .2em .5em;
+    width: fit-content;
+    margin-right: .5em;
+    height: fit-content;
+  }
+}
+
+.row
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.title-field
+{
+  margin-bottom: .5em;
+  font-size: .8em;
+}
+
+.col
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

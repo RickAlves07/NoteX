@@ -18,6 +18,24 @@
       <ion-label position="floating">Texto</ion-label>
       <ion-textarea id="texto" [(ngModel)]="note.Text"></ion-textarea>
     </ion-item>
+
+    <ion-item>
+      <div class="col">
+        <div class="row title-field">
+          <span>Tags</span>
+        </div>
+        <div class="row">
+          <div class="tag" *ngFor="let tag of note.Tags">
+            <div class="tag-item">
+              <span>{{ tag.Name }}</span>
+            </div>
+          </div>
+          <ion-button shape="round" [routerLink]="['/add-new-tag']">
+            <ion-icon name="add" color="light"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-item>
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
