@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
+import { NoteDto } from 'src/app/dtos/note-dto';
+import { TagDto } from 'src/app/dtos/tag-dto';
+import { NotesService } from '../../services/notes-service.service';
 
 @Component({
   selector: 'app-notes-with-tag',
@@ -6,10 +10,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notes-with-tag.page.scss'],
 })
 export class NotesWithTagPage implements OnInit {
+  public readonly TAG_EMPTY = new TagDto;
+  public notesFiltered: Array<NoteDto> = [];
+  public tagTofilter: TagDto = new TagDto;
 
-  constructor() { }
+  constructor
+  (public NotesService: NotesService,
+  ) { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    interval(500)
+    .subscribe(() => {
+      this.getSelectedTagFilter();
+    });
   }
 
+  getSelectedTagFilter()
+  {
+    this.tagTofilter = this.NotesService.getSelectedTagFilter();
+    if(this.tagTofilter.Name != '')
+    {
+      this.getfilteredNotesByTag();
+    }
+  }
+
+  getfilteredNotesByTag()
+  {
+    this.notesFiltered = this.NotesService.searchNotesWithTag(this.tagTofilter);
+  }
 }

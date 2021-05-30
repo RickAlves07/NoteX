@@ -3,6 +3,7 @@ import { NotesService } from 'src/app/services/notes-service.service';
 import { Component, OnInit } from '@angular/core';
 import { TagDto } from 'src/app/dtos/tag-dto';
 import { interval } from 'rxjs';
+import Utils from 'src/app/utilities/utilities-object';
 
 @Component({
   selector: 'app-add-new-note',
@@ -14,7 +15,7 @@ export class AddNewNotePage implements OnInit
 {
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
-  public readonly NOTE_EMPTY = null;
+  public readonly NOTE_EMPTY = new NoteDto;
   public readonly NEW_NOTE_STRING = 'New Note';
   public readonly EDIT_NOTE_STRING ='Edit Note';
   public readonly TAG_EMPTY = new TagDto;
@@ -67,13 +68,16 @@ export class AddNewNotePage implements OnInit
 
   deleteNote()
   {
-    this.NotesService.deleteNote(this.note);
+    if(this.isEdit)
+    {
+      this.NotesService.deleteNote(this.note);
+    }
     this.clearFields;
   }
 
   clearFields()
   {
-    this.note = this.NOTE_EMPTY;
+    this.note = Utils.objectCopy(this.NOTE_EMPTY);
   }
 
   getDateWithDayOfWeek()
@@ -120,7 +124,6 @@ export class AddNewNotePage implements OnInit
     .subscribe(() => {
       this.getSelectedTagToAddInNote();
       this.removeDeletedTags();
-
     });
   }
 

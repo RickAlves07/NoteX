@@ -11,7 +11,6 @@ import { NotesService } from '../../services/notes-service.service';
 export class SearchNotePage implements OnInit {
 
   public notes: Array<NoteDto> = [];
-  public tags: Array<TagDto> = [];
   public notesFiltered: Array<NoteDto> = [];
   public textToFind: string;
 
@@ -22,18 +21,12 @@ export class SearchNotePage implements OnInit {
   ngOnInit()
   {
     this.getNotes()
-    this.getTags();
   }
 
   getNotes()
   {
     this.notes = this.NotesService.getNotes()
     this.notesFiltered = this.notes;
-  }
-
-  getTags()
-  {
-    this.tags = this.NotesService.getTags()
   }
 
   filterNotes(textInput)

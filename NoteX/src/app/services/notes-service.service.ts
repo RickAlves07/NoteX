@@ -127,7 +127,7 @@ export class NotesService
     return Utils.objectCopy(menuItens);
   }
 
-  setSelectedTagFilter(tag: TagDto)
+  setSelectedTagFilter(tag)
   {
     this.selectedTagFilter = Utils.objectCopy(tag);
   }
@@ -161,7 +161,9 @@ export class NotesService
     return Utils.objectCopy(this.notes.filter(note =>
       note.Title.toLowerCase().includes(textToFind.toLowerCase()) ||
       note.Text.toLowerCase().includes(textToFind.toLowerCase()) ||
-      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase())));
+      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase()) ||
+      note.Tags.filter(tag =>
+        tag.Name.toLowerCase().includes(textToFind.toLowerCase()))));
   }
 
   deleteTag(tagToDelete)
@@ -200,7 +202,7 @@ export class NotesService
   {
     return Utils.objectCopy(this.notes.filter(note =>
       note.Tags.filter(tag =>
-        tag.Name.toLowerCase() == tagToFilter.toLowerCase())));
+        tag.Name.toLowerCase() == tagToFilter.Name.toLowerCase())));
   }
 
   setSelectedTagToAddInNote(tag)

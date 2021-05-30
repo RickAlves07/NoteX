@@ -6,7 +6,7 @@
           <ion-list-header>NoteX</ion-list-header>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let item of menuItems; let i = index">
-            <ion-item routerDirection="root" [routerLink]="" lines="none" detail="false" routerLinkActive="selected" routerLinkActive="active" (click)="setSelectedTagFilter(item)">
+            <ion-item routerDirection="root" [routerLink]="[item.Url]" lines="none" detail="false" routerLinkActive="selected" routerLinkActive="active" (click)="setSelectedTagFilter(item)">
               <ion-label>{{ item.Name }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
