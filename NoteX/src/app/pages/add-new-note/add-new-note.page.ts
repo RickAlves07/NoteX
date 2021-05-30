@@ -59,6 +59,12 @@ export class AddNewNotePage implements OnInit
     return (verifyTitle || verifyText);
   }
 
+  deleteNote()
+  {
+    this.NotesService.deleteNote(this.note);
+    this.clearFields;
+  }
+
   clearFields()
   {
     this.note = this.NOTE_EMPTY;

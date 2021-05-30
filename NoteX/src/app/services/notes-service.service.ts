@@ -23,14 +23,38 @@ export class NotesService
 
   saveNote(note)
   {
+    note.Id = this.notes.length;
     this.notes.unshift(note);
+    this.updateNoteId();
     this.clearSelectedNoteToEdit();
+    console.log('saveNote')
+    console.log(this.notes)
   }
 
   updateNote(note)
   {
-    this.notes.slice(this.indexSelectedNoteToEdit, 1);
+    this.notes.splice(note.Id, 1);
     this.saveNote(note);
+    console.log('Updating')
+    console.log(this.notes)
+  }
+
+  deleteNote(note)
+  {
+    this.notes.splice(note.Id, 1);
+    this.updateNoteId();
+    console.log('deleteNote')
+    console.log(this.notes)
+  }
+
+  updateNoteId()
+  {
+    let i = 0
+    this.notes.forEach(note =>
+    {
+      this.notes[i].Id = i;
+      i++;
+    });
   }
 
   getNotes()
@@ -45,25 +69,26 @@ export class NotesService
 
   createInitNotes()
   {
-    for(let i = 1; i <= 3 ; i++)
+    for(let i = 0; i < 3 ; i++)
     {
       const notefake = {
         Title: ("Title " + i),
         Text: (i + " - Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-        Tags: [],
+        Tags: this.tags,
         CreatedDate: this.getDateWithDayOfWeek(),
         EditedDate: null,
+        Id: i,
       }
-      this.notes.push(notefake);
+      this.notes.unshift(notefake);
     }
   }
 
   createInitTags()
   {
-    for(let i = 1; i <= 3; i++)
+    for(let i = 0; i < 3; i++)
     {
       const tagFake = {
-        Name: ('Tag ' + i),
+        Name: ('Tag ' + (i+1)),
         CreatedDate: this.getDateWithDayOfWeek(),
         EditedDate: null,
       }
@@ -102,13 +127,17 @@ export class NotesService
   setSeletedNoteToEdit(note: NoteDto, index)
   {
     this.selectedNoteToEdit = note;
-    this.indexSelectedNoteToEdit = index;
+    this.indexSelectedNoteToEdit = note.Id;
+    console.log('setSelectedNote')
+    console.log(this.notes)
   }
 
   getSelectedNoteToEdit()
   {
     const noteToReturn = this.selectedNoteToEdit;
     this.clearSelectedNoteToEdit();
+    console.log('getSelected')
+    console.log(this.notes)
     return noteToReturn;
   }
 
@@ -137,7 +166,7 @@ export class NotesService
   }
 
   saveNewTag(tag: TagDto)
-  {debugger
+  {
     this.tags.push(tag);
   }
 }

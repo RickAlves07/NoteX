@@ -16,8 +16,8 @@ export class AppComponent implements OnInit
 
   ngOnInit()
   {
-    this.NotesService.createInitNotes();
     this.NotesService.createInitTags();
+    this.NotesService.createInitNotes();
     this.menuItems = this.NotesService.getTagsMenu();
   }
 
