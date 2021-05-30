@@ -52,9 +52,9 @@ export class AddNewTagPage implements OnInit
     }
   }
 
-  deleteTagFromService(index)
+  deleteTagFromService(tagToDelete)
   {
-    this.NotesService.deleteTag(index)
+    this.NotesService.deleteTag(tagToDelete)
     this.getTags();
   }
 
@@ -66,7 +66,6 @@ export class AddNewTagPage implements OnInit
       this.newTag.CreatedDate = this.getDateWithDayOfWeek();
       this.newTag.EditedDate = null;
       this.saveNewTag();
-      this.clearNewTag();
       this.getTags();
     }
   }
@@ -75,6 +74,7 @@ export class AddNewTagPage implements OnInit
   {
     this.isAdd = false;
     this.NotesService.saveNewTag(this.newTag);
+    this.clearNewTag();
   }
 
   getDateWithDayOfWeek()

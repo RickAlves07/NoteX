@@ -1,8 +1,8 @@
 import { TagDto } from './../dtos/tag-dto';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
 import { NoteDto } from '../dtos/note-dto';
+import Utils from '../utilities/utilities-object';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class NotesService
 {
   public readonly DATE_FRONTEND_ONLY = "DD/MM/YYYY";
   public readonly DATE_WEEK_FORMAT_FRONTEND_ONLY = "dddd";
-  public readonly NOTE_EMPTY = null;
+  public readonly NOTE_EMPTY = new NoteDto;
   public readonly TAG_EMPTY = new TagDto;
 
   constructor() { }
@@ -25,9 +25,8 @@ export class NotesService
 
   saveNote(note)
   {
-    note.Id = this.notes.length;
-    this.notes.unshift(note);
-    this.updateNoteId();
+    this.notes.unshift(Utils.objectCopy(note));
+    this.updateNotesIds();
     this.clearSelectedNoteToEdit();
   }
 
@@ -40,12 +39,12 @@ export class NotesService
   deleteNote(note)
   {
     this.notes.splice(note.Id, 1);
-    this.updateNoteId();
+    this.updateNotesIds();
   }
 
-  updateNoteId()
+  updateNotesIds()
   {
-    let i = 0
+    let i = 0;
     this.notes.forEach(note =>
     {
       this.notes[i].Id = i;
@@ -53,14 +52,24 @@ export class NotesService
     });
   }
 
+  updateTagsIds()
+  {
+    let i = 0;
+    this.tags.forEach(tag =>
+    {
+      this.tags[i].Id = i;
+      i++;
+    });
+  }
+
   getNotes()
   {
-    return this.notes;
+    return Utils.objectCopy(this.notes);
   }
 
   getTags()
   {
-    return this.tags;
+    return Utils.objectCopy(this.tags);
   }
 
   createInitNotes()
@@ -70,13 +79,14 @@ export class NotesService
       const notefake = {
         Title: ("Title " + i),
         Text: (i + " - Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-        Tags: this.tags,
-        CreatedDate: this.getDateWithDayOfWeek(),
+        Tags: Utils.objectCopy(this.tags),
+        CreatedDate: Utils.objectCopy(this.getDateWithDayOfWeek()),
         EditedDate: null,
         Id: i,
       }
-      this.notes.unshift(notefake);
+      this.notes.unshift(Utils.objectCopy(notefake));
     }
+    this.updateNotesIds();
   }
 
   createInitTags()
@@ -87,16 +97,18 @@ export class NotesService
         Name: ('Tag ' + (i+1)),
         CreatedDate: this.getDateWithDayOfWeek(),
         EditedDate: null,
+        Id: i
       }
       this.tags.push(tagFake);
     }
+    this.updateTagsIds();
   }
 
   getDateWithDayOfWeek()
   {
     const DateMonth = moment().startOf('day').format(this.DATE_FRONTEND_ONLY);
     const DateWeek = moment().startOf('date').locale('pt-br').format(this.DATE_WEEK_FORMAT_FRONTEND_ONLY);
-    return String(DateWeek + ', ' + DateMonth);
+    return Utils.objectCopy(String(DateWeek + ', ' + DateMonth));
   }
 
   getTagsMenu()
@@ -112,70 +124,94 @@ export class NotesService
     {
       menuItens.push(tag)
     });
-    return menuItens;
+    return Utils.objectCopy(menuItens);
   }
 
   setSelectedTagFilter(tag: TagDto)
   {
-    this.selectedTagFilter = tag;
+    this.selectedTagFilter = Utils.objectCopy(tag);
   }
 
-  setSeletedNoteToEdit(note: NoteDto, index)
+  setSeletedNoteToEdit(note: NoteDto)
   {
-    this.selectedNoteToEdit = note;
-    this.indexSelectedNoteToEdit = note.Id;
+    this.selectedNoteToEdit = Utils.objectCopy(note);
+    this.indexSelectedNoteToEdit = Utils.objectCopy(note.Id);
   }
 
   getSelectedNoteToEdit()
   {
-    const noteToReturn = this.selectedNoteToEdit;
+    const noteToReturn = Utils.objectCopy(this.selectedNoteToEdit);
     this.clearSelectedNoteToEdit();
-    return noteToReturn;
+    return Utils.objectCopy(noteToReturn);
   }
 
   getSelectedTagFilter()
   {
-    return this.selectedTagFilter;
+    return Utils.objectCopy(this.selectedTagFilter);
   }
 
   clearSelectedNoteToEdit()
   {
-    this.selectedNoteToEdit = this.NOTE_EMPTY;
+    this.selectedNoteToEdit = Utils.objectCopy(this.NOTE_EMPTY);
     this.indexSelectedNoteToEdit = null;
   }
 
   searchTextNotes(textToFind)
   {
-    return this.notes.filter(note =>
+    return Utils.objectCopy(this.notes.filter(note =>
       note.Title.toLowerCase().includes(textToFind.toLowerCase()) ||
       note.Text.toLowerCase().includes(textToFind.toLowerCase()) ||
-      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase()));
+      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase())));
   }
 
-  deleteTag(index)
+  deleteTag(tagToDelete)
   {
-    this.tags.splice(index, 1);
+    this.tags.splice(tagToDelete.Id, 1);
+    this.removeDeletedTagFromNotes(tagToDelete);
   }
 
-  saveNewTag(tag: TagDto)
+  removeDeletedTagFromNotes(tagDeleted)
   {
-    this.tags.push(tag);
+    for(let indexNotes = 0; indexNotes < this.notes.length; indexNotes++)
+    {
+      for(let indexTagInNote= 0; indexTagInNote < this.notes[indexNotes].Tags.length; indexTagInNote++)
+      {
+        if(this.notes[indexNotes].Tags[indexTagInNote].Name.toLowerCase() == tagDeleted.Name.toLowerCase())
+        {
+          this.notes[indexNotes].Tags.splice(tagDeleted.Id, 1);
+        }
+      }
+    }
+    this.updateTagsIds();
   }
+
+  saveNewTag(tagTosave: TagDto)
+  {
+    const verifyIfTagExist = this.tags.filter(tag =>
+      tag.Name.toLowerCase() == tagTosave.Name.toLowerCase());
+      if(verifyIfTagExist.length == 0)
+      {
+        this.tags.push(tagTosave);
+        this.updateTagsIds();
+      }
+  }
+
   searchNotesWithTag(tagToFilter)
   {
-    return this.notes.filter(note =>
+    return Utils.objectCopy(this.notes.filter(note =>
       note.Tags.filter(tag =>
-        tag.Name.toLowerCase() == tagToFilter));
+        tag.Name.toLowerCase() == tagToFilter.toLowerCase())));
   }
 
   setSelectedTagToAddInNote(tag)
   {
-    this.selectedTagToAddInNote = tag;
+    this.selectedTagToAddInNote = Utils.objectCopy(tag);
   }
 
   getSelectedTagToAddInNote()
   {
-    const tagTemp = this.selectedTagToAddInNote;
-    return tagTemp;
+    const tagToReturn = Utils.objectCopy(this.selectedTagToAddInNote);
+    this.selectedTagToAddInNote = Utils.objectCopy(this.TAG_EMPTY);
+    return tagToReturn;
   }
 }

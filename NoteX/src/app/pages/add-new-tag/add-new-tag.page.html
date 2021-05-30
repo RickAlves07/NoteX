@@ -10,9 +10,9 @@
 <ion-content [fullscreen]="true">
   <ion-grid class="container">
 
-    <div class="tag-item" *ngFor="let tag of tags; let i = index" id="list-tags" (click)="setSelectedTagToAddInNote(tag)" [routerLink]="['/add-new-note']" >
+    <div class="tag-item" *ngFor="let tag of tags; let i = index" id="list-tags">
       <div class="left-side">
-        <span *ngIf="!isEdit[i]" class="text-tag">{{ tag.Name }}</span>
+        <span *ngIf="!isEdit[i]" class="text-tag" (click)="setSelectedTagToAddInNote(tag)" [routerLink]="['/add-new-note']" >{{ tag.Name }}</span>
         <textarea *ngIf="isEdit[i]" class="textarea" maxlength="15" type="text" [(ngModel)]="textTag[i]"></textarea>
       </div>
       <div class="right-side">
@@ -22,7 +22,7 @@
         <ion-button shape="round" color="success" *ngIf="isEdit[i]" (click)="confirmEditTag(i)">
           <ion-icon name="checkmark" color="light"></ion-icon>
         </ion-button>
-        <ion-button shape="round" color="danger" (click)="deleteTagFromService(i)">
+        <ion-button shape="round" color="danger" (click)="deleteTagFromService(tag)">
           <ion-icon name="trash" color="light"></ion-icon>
         </ion-button>
       </div>

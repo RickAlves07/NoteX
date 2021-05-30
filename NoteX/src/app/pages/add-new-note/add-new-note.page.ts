@@ -30,9 +30,8 @@ export class AddNewNotePage implements OnInit
 
   ngOnInit()
   {
-    this.verifyIfHasSelectedTagToAdd();
     this.verifyIsEditOrNewNote();
-    console.log(this.note)
+    this.verifyIfHasSelectedTagToAdd();
   }
 
   saveNote()
@@ -83,7 +82,7 @@ export class AddNewNotePage implements OnInit
   }
 
   verifyIsEditOrNewNote()
-  {debugger
+  {
     const noteToEdit = this.NotesService.getSelectedNoteToEdit()
     if((noteToEdit.Title == '') && (noteToEdit.Text == ''))
     {
@@ -108,8 +107,8 @@ export class AddNewNotePage implements OnInit
     if((tagTemp.Name != undefined) && (tagTemp.Name !== null) && (tagTemp !== this.TAG_EMPTY) && (tagTemp.Name !== ''))
     {
       const test = this.note.Tags.filter(tag => tag.Name == tagTemp.Name)
-      if(test === [])
-      {debugger
+      if(test.length == 0)
+      {
         this.note.Tags.push(tagTemp);
       }
     }
@@ -117,10 +116,36 @@ export class AddNewNotePage implements OnInit
 
   verifyIfHasSelectedTagToAdd()
   {
-    interval(1000)
+    interval(500)
     .subscribe(() => {
       this.getSelectedTagToAddInNote();
-    });
+      this.removeDeletedTags();
 
+    });
+  }
+
+  removeDeletedTags()
+  {
+    let noteHasATagOfAllSavedTags = false;
+    const AllsavedTags = this.NotesService.getTags()
+    if(this.note.Tags.length !== AllsavedTags.lenght)
+    {
+      for(let indexTagInNote = 0; indexTagInNote < this.note.Tags.length; indexTagInNote++)
+      {
+        for(let indexAllTags = 0; indexAllTags < AllsavedTags.length; indexAllTags++)
+        {
+          noteHasATagOfAllSavedTags = false;
+          if(AllsavedTags[indexAllTags].Name.toLowerCase() == this.note.Tags[indexTagInNote].Name.toLowerCase())
+          {
+            noteHasATagOfAllSavedTags = true;
+            break;
+          }
+        }
+        if(!noteHasATagOfAllSavedTags)
+        {
+          this.note.Tags.splice(this.note.Tags[indexTagInNote].Id , 1);
+        }
+      }
+    }
   }
 }
