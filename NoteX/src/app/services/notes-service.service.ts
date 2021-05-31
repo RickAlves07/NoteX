@@ -161,9 +161,7 @@ export class NotesService
     return Utils.objectCopy(this.notes.filter(note =>
       note.Title.toLowerCase().includes(textToFind.toLowerCase()) ||
       note.Text.toLowerCase().includes(textToFind.toLowerCase()) ||
-      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase()) ||
-      note.Tags.filter(tag =>
-        tag.Name.toLowerCase().includes(textToFind.toLowerCase()))));
+      note.CreatedDate.toLowerCase().includes(textToFind.toLowerCase())));
   }
 
   deleteTag(tagToDelete)

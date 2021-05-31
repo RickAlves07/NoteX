@@ -2,6 +2,25 @@ ion-menu-button {
   color: var(--ion-color-primary);
 }
 
+:root {
+  --ion-color-header-color: #E16B39;
+  --ion-color-header-color-rgb: 225,107,57;
+  --ion-color-header-color-contrast: #000000;
+  --ion-color-header-color-contrast-rgb: 0,0,0;
+  --ion-color-header-color-shade: #c65e32;
+  --ion-color-header-color-tint: #e47a4d;
+}
+
+.ion-color-header-color {
+  --ion-color-base: var(--ion-color-header-color);
+  --ion-color-base-rgb: var(--ion-color-header-color-rgb);
+  --ion-color-contrast: var(--ion-color-header-color-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-header-color-contrast-rgb);
+  --ion-color-shade: var(--ion-color-header-color-shade);
+  --ion-color-tint: var(--ion-color-header-color-tint);
+}
+
+
 #container {
   text-align: center;
   position: absolute;
