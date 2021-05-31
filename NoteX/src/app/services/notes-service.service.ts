@@ -128,7 +128,7 @@ export class NotesService
   }
 
   setSelectedTagFilter(tag)
-  {debugger
+  {
     this.selectedTagFilter = Utils.objectCopy(tag);
   }
 
@@ -146,7 +146,7 @@ export class NotesService
   }
 
   getSelectedTagFilter()
-  {debugger
+  {
     return Utils.objectCopy(this.selectedTagFilter);
   }
 
@@ -199,7 +199,7 @@ export class NotesService
   }
 
   searchNotesWithTag(tagToFilter)
-  {debugger
+  {
     let notesWithTagToReturn: Array<NoteDto> = []
     for(let indexNotes = 0; indexNotes < this.notes.length; indexNotes++)
     {
@@ -215,7 +215,7 @@ export class NotesService
   }
 
   setSelectedTagToAddInNote(tag)
-  {debugger
+  {
     this.selectedTagToAddInNote = Utils.objectCopy(tag);
   }
 
