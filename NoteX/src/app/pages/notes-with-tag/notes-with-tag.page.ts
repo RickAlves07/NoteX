@@ -20,10 +20,7 @@ export class NotesWithTagPage implements OnInit {
 
   ngOnInit()
   {
-    interval(500)
-    .subscribe(() => {
-      this.getSelectedTagFilter();
-    });
+    this.getSelectedTagFilter();
   }
 
   getSelectedTagFilter()

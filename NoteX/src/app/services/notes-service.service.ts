@@ -128,7 +128,7 @@ export class NotesService
   }
 
   setSelectedTagFilter(tag)
-  {
+  {debugger
     this.selectedTagFilter = Utils.objectCopy(tag);
   }
 
@@ -146,7 +146,7 @@ export class NotesService
   }
 
   getSelectedTagFilter()
-  {
+  {debugger
     return Utils.objectCopy(this.selectedTagFilter);
   }
 
@@ -199,14 +199,23 @@ export class NotesService
   }
 
   searchNotesWithTag(tagToFilter)
-  {
-    return Utils.objectCopy(this.notes.filter(note =>
-      note.Tags.filter(tag =>
-        tag.Name.toLowerCase() == tagToFilter.Name.toLowerCase())));
+  {debugger
+    let notesWithTagToReturn: Array<NoteDto> = []
+    for(let indexNotes = 0; indexNotes < this.notes.length; indexNotes++)
+    {
+      for(let indexTag = 0; indexTag < this.notes[indexNotes].Tags.length; indexTag++)
+      {
+        if(this.notes[indexNotes].Tags[indexTag].Name === tagToFilter.Name)
+        {
+          notesWithTagToReturn.unshift(this.notes[indexNotes])
+        }
+      }
+    };
+    return notesWithTagToReturn;
   }
 
   setSelectedTagToAddInNote(tag)
-  {
+  {debugger
     this.selectedTagToAddInNote = Utils.objectCopy(tag);
   }
 

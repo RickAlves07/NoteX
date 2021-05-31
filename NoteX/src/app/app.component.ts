@@ -21,6 +21,7 @@ export class AppComponent implements OnInit
   {
     this.NotesService.createInitTags();
     this.NotesService.createInitNotes();
+    this.getTagsMenu();
   }
 
   setSelectedTagFilter(tag)
@@ -31,12 +32,11 @@ export class AppComponent implements OnInit
   getTagsMenu()
   {
     this.tags = this.NotesService.getTags();
-    let menuItens: Array<any> = [
-      {
-        Name: 'All',
-        Url: '',
-      }
-    ];
+    let menuItens =
+    {
+      Name: 'All',
+      Url: '',
+    };
     this.menuItems.push(menuItens);
 
     this.tags.forEach(tag =>
@@ -44,25 +44,34 @@ export class AppComponent implements OnInit
       tag.Url = '/notes-with-tag'
       this.menuItems.push(tag)
     });
+    this.refreshMenuItens();
   }
 
   verifyIfHasNewTags()
   {
     let menuHasATagOfAllSavedTags = false;
-    for(let indexTagInNote = 0; indexTagInNote < this.menuItems.length; indexTagInNote++)
+    let isBreak = false;
+    for(let indexAllTags = 0; indexAllTags < this.tags.length; indexAllTags++)
     {
-      for(let indexAllTags = 0; indexAllTags < this.tags.length; indexAllTags++)
+      for(let indexTagInMenu = 0; indexTagInMenu < this.menuItems.length; indexTagInMenu++)
       {
         menuHasATagOfAllSavedTags = false;
-        if(this.tags[indexAllTags].Name.toLowerCase() == this.menuItems[indexTagInNote].Name.toLowerCase())
+        if(this.menuItems[indexTagInMenu].Name.toLowerCase() == this.tags[indexAllTags].Name.toLowerCase())
         {
           menuHasATagOfAllSavedTags = true;
           break;
         }
-        else if(!menuHasATagOfAllSavedTags && this.menuItems[indexTagInNote].Name != 'All')
+        else if((indexTagInMenu == this.menuItems.length-1) && (!menuHasATagOfAllSavedTags))
         {
-          this.menuItems.push(this.tags[indexAllTags]);
+          this.menuItems = [];
+          isBreak = true;
+          this.getTagsMenu();
+          break;
         }
+      }
+      if(isBreak)
+      {
+        break;
       }
     }
   }
